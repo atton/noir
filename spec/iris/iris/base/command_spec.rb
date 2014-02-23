@@ -31,4 +31,67 @@ describe 'Iris::Base::Command' do
     end
   end
 
+  describe 'Command.sub_commands' do
+    it 'return [] when not defined sub commands' do
+      expect(Iris::Base::Command.sub_commands).to eq([])
+    end
+
+    describe 'when defined sub commands.' do
+      before(:all) do
+        class Hoge < Iris::Base::Command
+          class SubCommand < Iris::Base::Command
+            class SubSubCommand < Iris::Base::Command
+            end
+            class SubSubNonCommand
+            end
+          end
+          class SubCommandTwo < Iris::Base::Command
+          end
+
+          class SubNonCommand
+          end
+        end
+
+        @commands = Hoge.sub_commands
+      end
+
+      it 'return subcommands' do
+        expect(@commands).to eq([:SubCommand, :SubCommandTwo])
+      end
+
+      it 'not include symbol that not inherited Iris::Base::Comand' do
+        expect(@commands).not_to include(:SubNonCommand)
+      end
+
+      it 'not include symbol that subsub command' do
+        expect(@commands).not_to include(:SubSubCommand)
+      end
+
+      it 'not include self' do
+        expect(@commands).not_to include(:Hoge)
+      end
+
+      describe 'in sub command' do
+        before { @commands = Hoge::SubCommand.sub_commands }
+
+        it 'return sub sub command' do
+          expect(@commands).to eq([:SubSubCommand])
+        end
+
+        it 'not include sub sub non command' do
+          expect(@commands).not_to include(:SubSubNonCommand)
+        end
+
+        it 'not include sub command' do
+          expect(@commands).not_to include(:SubCommand, :SubCommandTwo, :SubNonCommand)
+        end
+
+        it 'not include self class' do
+          expect(@commands).not_to include(:SubCommand)
+        end
+
+      end
+    end
+
+  end
 end

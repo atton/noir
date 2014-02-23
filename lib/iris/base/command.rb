@@ -22,11 +22,9 @@ module Iris::Base
       puts self.sub_commands
     end
 
-
-    private
-
     def self.sub_commands
-      return []
+      consts = self.constants - self.superclass.constants
+      consts.select{|c| self.const_get(c).ancestors.include?(Iris::Base::Command)}
     end
 
   end
