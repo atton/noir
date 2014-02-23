@@ -14,5 +14,20 @@ module Iris::Base
       end
     end
 
+    def self.execute
+      if self == Iris::Base::Command
+        raise 'called raw Iris::Base::Command.execute. please call it in extended class.'
+      end
+
+      puts self.sub_commands
+    end
+
+
+    private
+
+    def self.sub_commands
+      return []
+    end
+
   end
 end
