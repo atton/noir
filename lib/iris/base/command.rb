@@ -19,7 +19,9 @@ module Iris::Base
         raise 'called raw Iris::Base::Command.execute. please call it in extended class.'
       end
 
-      puts self.sub_commands
+      # default execute is show description with sub commands.
+      self.description
+      self.sub_commands.each{|c| c.description}
     end
 
     def self.sub_commands

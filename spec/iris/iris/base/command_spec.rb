@@ -24,10 +24,18 @@ describe 'Iris::Base::Command' do
       expect{Iris::Base::Command.execute}.to raise_error(RuntimeError)
     end
 
-    it 'not raise exception if called in extended class' do
+    it 'raise exception if called in extended class but undefined description' do
       class Hoge < Iris::Base::Command
       end
-      expect{Hoge.execute}.not_to raise_error
+      expect{Hoge.execute}.to raise_error
+    end
+
+    it 'output description if called in extended class and defined description' do
+      class Hoge < Iris::Base::Command
+      end
+      Hoge.class_variable_set :@@description, "hoge"
+      expect{Hoge.execute}.to output.to_stdout
+      Hoge.class_variable_set :@@description, nil
     end
   end
 
