@@ -20,22 +20,19 @@ describe 'Iris::Base::Command' do
   end
 
   describe 'Command.execute' do
+    before { stub_const('Hoge', Class.new(Iris::Base::Command)) }
+
     it 'raise exception if called in not extended class' do
       expect{Iris::Base::Command.execute}.to raise_error(RuntimeError)
     end
 
     it 'raise exception if called in extended class but undefined description' do
-      class Hoge < Iris::Base::Command
-      end
       expect{Hoge.execute}.to raise_error
     end
 
     it 'output description if called in extended class and defined description' do
-      class Hoge < Iris::Base::Command
-      end
       Hoge.class_variable_set :@@description, "hoge"
       expect{Hoge.execute}.to output.to_stdout
-      Hoge.class_variable_set :@@description, nil
     end
   end
 
@@ -45,7 +42,16 @@ describe 'Iris::Base::Command' do
     end
 
     describe 'when defined sub commands.' do
-      before(:all) do
+      before do
+        stub_const('Hoge'                               , Class.new(Iris::Base::Command))
+        stub_const('Hoge::SubCommand'                   , Class.new(Iris::Base::Command))
+        stub_const('Hoge::SubCommand::SubSubCommand'    , Class.new(Iris::Base::Command))
+        stub_const('Hoge::SubCommand::SubSubNonCommand' , Class.new)
+        stub_const('Hoge::SubCommandTwo'                , Class.new(Iris::Base::Command))
+        stub_const('Hoge::SubNonCommand'                , Class.new)
+
+=begin
+        # stub_const is this structure
         class Hoge < Iris::Base::Command
           class SubCommand < Iris::Base::Command
             class SubSubCommand < Iris::Base::Command
@@ -59,6 +65,7 @@ describe 'Iris::Base::Command' do
           class SubNonCommand
           end
         end
+=end
 
         @commands = Hoge.sub_commands
       end
