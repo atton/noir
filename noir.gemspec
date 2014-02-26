@@ -1,11 +1,11 @@
 # coding: utf-8
 lib = File.expand_path('../lib', __FILE__)
 $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
-require 'iris/version'
+require 'noir/version'
 
 Gem::Specification.new do |spec|
-  spec.name          = "iris"
-  spec.version       = Iris::VERSION
+  spec.name          = "noir"
+  spec.version       = Noir::VERSION
   spec.authors       = ["atton"]
   spec.email         = ["e115763@gmail.com"]
   spec.summary       = %q{Utilities for atton.}

@@ -1,29 +1,29 @@
-require 'iris'
+require 'noir'
 require 'spec_helper'
 
-describe 'Iris::Base::Command' do
+describe 'Noir::Base::Command' do
 
   it 'is class' do
-    expect(Iris::Base::Command.class).to eq(Class)
+    expect(Noir::Base::Command.class).to eq(Class)
   end
 
   describe 'Command.description' do
     it 'raise exception if description is nil.' do
-      expect{Iris::Base::Command.description}.to raise_error(RuntimeError)
+      expect{Noir::Base::Command.description}.to raise_error(RuntimeError)
     end
 
     it 'output description if description is not nil' do
-      Iris::Base::Command.class_variable_set :@@description, "hoge"
-      expect{Iris::Base::Command.description}.to output("hoge\n").to_stdout
-      Iris::Base::Command.class_variable_set :@@description, nil
+      Noir::Base::Command.class_variable_set :@@description, "hoge"
+      expect{Noir::Base::Command.description}.to output("hoge\n").to_stdout
+      Noir::Base::Command.class_variable_set :@@description, nil
     end
   end
 
   describe 'Command.execute' do
-    before { stub_const('Hoge', Class.new(Iris::Base::Command)) }
+    before { stub_const('Hoge', Class.new(Noir::Base::Command)) }
 
     it 'raise exception if called in not extended class' do
-      expect{Iris::Base::Command.execute}.to raise_error(RuntimeError)
+      expect{Noir::Base::Command.execute}.to raise_error(RuntimeError)
     end
 
     it 'raise exception if called in extended class but undefined description' do
@@ -38,28 +38,28 @@ describe 'Iris::Base::Command' do
 
   describe 'Command.sub_commands' do
     it 'return [] when not defined sub commands' do
-      expect(Iris::Base::Command.sub_commands).to eq([])
+      expect(Noir::Base::Command.sub_commands).to eq([])
     end
 
     describe 'when defined sub commands.' do
       before do
-        stub_const('Hoge'                               , Class.new(Iris::Base::Command))
-        stub_const('Hoge::SubCommand'                   , Class.new(Iris::Base::Command))
-        stub_const('Hoge::SubCommand::SubSubCommand'    , Class.new(Iris::Base::Command))
+        stub_const('Hoge'                               , Class.new(Noir::Base::Command))
+        stub_const('Hoge::SubCommand'                   , Class.new(Noir::Base::Command))
+        stub_const('Hoge::SubCommand::SubSubCommand'    , Class.new(Noir::Base::Command))
         stub_const('Hoge::SubCommand::SubSubNonCommand' , Class.new)
-        stub_const('Hoge::SubCommandTwo'                , Class.new(Iris::Base::Command))
+        stub_const('Hoge::SubCommandTwo'                , Class.new(Noir::Base::Command))
         stub_const('Hoge::SubNonCommand'                , Class.new)
 
 =begin
         # stub_const is this structure
-        class Hoge < Iris::Base::Command
-          class SubCommand < Iris::Base::Command
-            class SubSubCommand < Iris::Base::Command
+        class Hoge < Noir::Base::Command
+          class SubCommand < Noir::Base::Command
+            class SubSubCommand < Noir::Base::Command
             end
             class SubSubNonCommand
             end
           end
-          class SubCommandTwo < Iris::Base::Command
+          class SubCommandTwo < Noir::Base::Command
           end
 
           class SubNonCommand
@@ -74,7 +74,7 @@ describe 'Iris::Base::Command' do
         expect(@commands).to eq([:SubCommand, :SubCommandTwo])
       end
 
-      it 'not include symbol that not inherited Iris::Base::Comand' do
+      it 'not include symbol that not inherited Noir::Base::Comand' do
         expect(@commands).not_to include(:SubNonCommand)
       end
 
