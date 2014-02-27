@@ -1,5 +1,3 @@
-require 'noir'
-
 module Noir::Base
   class TerminalCommand < Noir::Base::Command
 
