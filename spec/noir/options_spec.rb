@@ -33,6 +33,20 @@ describe 'Noir::Options' do
       Noir::Options.parse_options_from_argv!
       expect(Noir::Options.exist? Noir::Options::Help).to eq(true)
     end
+
+    it 'exit with output version if ARGV include "-v"' do
+      stub_const('ARGV', ['-v'])
+      expect {
+        expect{Noir::Options.parse_options_from_argv!}.to raise_error(SystemExit)
+      }.to output('noir ' + Noir::VERSION + "\n").to_stdout
+    end
+
+    it 'exit with output version if ARGV include "--version"' do
+      stub_const('ARGV', ['--version'])
+      expect {
+        expect{Noir::Options.parse_options_from_argv!}.to raise_error(SystemExit)
+      }.to output('noir ' + Noir::VERSION + "\n").to_stdout
+    end
   end
 
 end

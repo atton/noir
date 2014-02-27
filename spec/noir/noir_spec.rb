@@ -3,8 +3,13 @@ require 'noir'
 
 describe Noir do
 
+
   it 'is can access Noir::VERSION' do
     expect(Noir.class_eval('Noir::VERSION.class')).to eq(String)
+  end
+
+  it 'is can access Noir::Options' do
+    expect(Noir.class_eval('Noir::Options.class')).to eq(Class)
   end
 
   it 'is can access Noir::Base' do
