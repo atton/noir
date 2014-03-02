@@ -1,5 +1,4 @@
 require 'noir'
-require 'pry'
 
 module Noir
 
@@ -32,6 +31,13 @@ module Noir
       end
 
       return command
+    end
+
+    def self.args_from_argv
+      argv         = ARGV.clone
+      command_str  = self.command_from_argv.to_s.sub(/^Noir::Command::/, '')
+      command_size = command_str.split('::').size
+      return argv.drop(command_size)
     end
 
   end
