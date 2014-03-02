@@ -74,7 +74,7 @@ describe 'Noir::Base::Command' do
         expect(@commands).to eq([:SubCommand, :SubCommandTwo])
       end
 
-      it 'not include symbol that not inherited Noir::Base::Comand' do
+      it 'not include symbol that not inherited Noir::Base::Command' do
         expect(@commands).not_to include(:SubNonCommand)
       end
 
