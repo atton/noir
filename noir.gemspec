@@ -10,7 +10,7 @@ Gem::Specification.new do |spec|
   spec.email         = ["e115763@gmail.com"]
   spec.summary       = %q{Utilities for atton.}
   spec.description   = %q{Untility commands with completion for atton.}
-  spec.homepage      = ""
+  spec.homepage      = "http://github.com/atton-/noir"
   spec.license       = "MIT"
 
   spec.files         = `git ls-files -z`.split("\x0")
