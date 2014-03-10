@@ -11,7 +11,7 @@ module Noir::Base
         end
       end
 
-      def execute
+      def execute *args
         if self == Noir::Base::Command
           raise 'called raw Noir::Base::Command.execute. please call it in extended class.'
         end
