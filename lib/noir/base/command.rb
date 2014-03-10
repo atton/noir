@@ -2,13 +2,15 @@ module Noir::Base
 
   class Command
 
-    @@description = nil
+    class << self   # class methods
+      attr_accessor :description
 
-    def self.description
-      if @@description.nil?
-        raise "Undefined description :" + self.class.to_s
-      else
-        puts @@description
+      def description
+        if @description.nil?
+          raise "Undefined description : " + self.to_s
+        else
+          puts @description
+        end
       end
     end
 

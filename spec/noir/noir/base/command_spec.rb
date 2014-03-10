@@ -13,8 +13,15 @@ describe 'Noir::Base::Command' do
     end
 
     it 'output description if description is not nil' do
-      Noir::Base::Command.class_variable_set :@@description, "hoge"
+      Noir::Base::Command.instance_variable_set :@description, "hoge"
       expect{Noir::Base::Command.description}.to output("hoge\n").to_stdout
+      Noir::Base::Command.instance_variable_set :@description, nil
+    end
+
+    it 'not effect that set description into superclass to subclass' do
+      Noir::Base::Command.class_variable_set :@@description, "hoge"
+      stub_const('Hoge', Class.new(Noir::Base::Command))
+      expect{Hoge.description}.to raise_error
       Noir::Base::Command.class_variable_set :@@description, nil
     end
   end
@@ -31,8 +38,9 @@ describe 'Noir::Base::Command' do
     end
 
     it 'output description if called in extended class and defined description' do
-      Hoge.class_variable_set :@@description, "hoge"
+      Hoge.instance_variable_set :@description, "hoge"
       expect{Hoge.execute}.to output.to_stdout
+      Hoge.instance_variable_set :@description, nil
     end
   end
 
