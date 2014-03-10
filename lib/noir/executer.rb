@@ -38,5 +38,9 @@ module Noir
       return argv.drop(command_size)
     end
 
+    def self.execute
+      command_from_argv.execute args_from_argv
+    end
+
   end
 end

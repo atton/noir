@@ -2,4 +2,8 @@
 
 require 'noir'
 
-Noir.main
+begin
+  Noir.main
+rescue => e
+  puts e.message
+end

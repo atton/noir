@@ -3,13 +3,11 @@ module Noir::Base
   class Command
 
     class << self   # class methods
-      attr_accessor :description
-
       def description
         if @description.nil?
           raise "Undefined description : " + self.to_s
         else
-          puts @description
+          puts self.to_s.sub(/^Noir::Command::/, '').downcase + "\t: " + @description
         end
       end
 

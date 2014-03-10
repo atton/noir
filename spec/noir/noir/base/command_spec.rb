@@ -14,7 +14,7 @@ describe 'Noir::Base::Command' do
 
     it 'output description if description is not nil' do
       Noir::Base::Command.instance_variable_set :@description, "hoge"
-      expect{Noir::Base::Command.description}.to output("hoge\n").to_stdout
+      expect{Noir::Base::Command.description}.to output.to_stdout
       Noir::Base::Command.instance_variable_set :@description, nil
     end
 
