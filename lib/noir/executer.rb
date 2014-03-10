@@ -1,7 +1,4 @@
-require 'noir'
-
 module Noir
-
   class Executer
 
     def self.command_from_argv
@@ -23,7 +20,8 @@ module Noir
           elsif command.superclass ==  Noir::Base::TerminalCommand
             break                                               # search finished by terminal command
           else
-            command_arr.pop   # delete last matched_command, because this class is not inherited Noir::Base::Command
+            command_arr.pop
+            # delete last matched_command, because this class is not inherited Noir::Base::Command
             command = eval(command_arr.join('::'))
             break
           end

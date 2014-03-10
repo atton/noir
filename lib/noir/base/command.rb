@@ -12,21 +12,21 @@ module Noir::Base
           puts @description
         end
       end
-    end
 
-    def self.execute
-      if self == Noir::Base::Command
-        raise 'called raw Noir::Base::Command.execute. please call it in extended class.'
+      def execute
+        if self == Noir::Base::Command
+          raise 'called raw Noir::Base::Command.execute. please call it in extended class.'
+        end
+
+        # default execute is show description with sub commands.
+        description
+        sub_commands.each{|c| c.description}
       end
 
-      # default execute is show description with sub commands.
-      self.description
-      self.sub_commands.each{|c| c.description}
-    end
-
-    def self.sub_commands
-      consts = self.constants - self.superclass.constants
-      consts.select{|c| self.const_get(c).ancestors.include?(Noir::Base::Command)}
+      def sub_commands
+        consts = constants - superclass.constants
+        consts.select{|c| const_get(c).ancestors.include?(Noir::Base::Command)}
+      end
     end
 
   end
