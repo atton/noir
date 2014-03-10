@@ -7,7 +7,7 @@ module Noir::Base
         if @description.nil?
           raise "Undefined description : " + self.to_s
         else
-          puts self.to_s.sub(/^Noir::Command::/, '').downcase + "\t: " + @description
+          puts self.to_s.split(':').last.downcase.ljust(15) + " : " + @description
         end
       end
 
@@ -18,12 +18,13 @@ module Noir::Base
 
         # default execute is show description with sub commands.
         description
-        sub_commands.each{|c| c.description}
+        puts '-- sub commands --'
+        sub_commands.map{|c|eval(self.to_s + '::' + c.to_s)}.each{|c| c.description}
       end
 
       def sub_commands
         consts = constants - superclass.constants
-        consts.select{|c| const_get(c).ancestors.include?(Noir::Base::Command)}
+        consts = consts.select{|c| const_get(c).ancestors.include?(Noir::Base::Command)}
       end
     end
 
