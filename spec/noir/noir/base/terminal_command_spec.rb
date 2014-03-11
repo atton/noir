@@ -15,19 +15,18 @@ describe 'Noir::Base::TerminalCommand' do
     before { stub_const('Hoge', Class.new(Noir::Base::TerminalCommand)) }
 
     it 'raise exception when not overrided' do
-      expect{Noir::Base::TerminalCommand.execute}.to raise_error(RuntimeError)
+      expect{Noir::Base::TerminalCommand.execute}.to raise_error(RuntimeError, /^called raw/)
     end
 
-    it 'not raise exception in extended class' do
-      expect{Hoge.execute}.not_to raise_error
+    it 'raise exception in extended class not overrided' do
+      expect{Hoge.execute}.to raise_error(RuntimeError, /^please override/)
     end
 
-    it 'is support varibale length arguments' do
-      expect{Hoge.execute 0}.not_to raise_error
-      expect{Hoge.execute 0, 0}.not_to raise_error
-      expect{Hoge.execute 0, 0, 0}.not_to raise_error
-      expect{Hoge.execute 0, 0, 0, 0}.not_to raise_error
-      expect{Hoge.execute 0, 0, 0, 0, 0}.not_to raise_error
+    it 'raise exception in extended class not overrided' do
+      def Hoge.execute *args
+        puts "hoge"
+      end
+      expect{Hoge.execute}.to output("hoge\n").to_stdout
     end
   end
 
