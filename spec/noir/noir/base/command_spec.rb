@@ -40,7 +40,16 @@ describe 'Noir::Base::Command' do
     it 'output description if called in extended class and defined description' do
       Hoge.instance_variable_set :@description, "hoge"
       expect{Hoge.execute}.to output.to_stdout
-      Hoge.instance_variable_set :@description, nil
+    end
+
+    it 'is support varibale length arguments' do
+      Hoge.instance_variable_set :@description, "hoge"
+      expect{expect{Hoge.execute}.not_to raise_error}.to output.to_stdout
+      expect{expect{Hoge.execute 0}.not_to raise_error}.to output.to_stdout
+      expect{expect{Hoge.execute 0, 0}.not_to raise_error}.to output.to_stdout
+      expect{expect{Hoge.execute 0, 0, 0}.not_to raise_error}.to output.to_stdout
+      expect{expect{Hoge.execute 0, 0, 0, 0}.not_to raise_error}.to output.to_stdout
+      expect{expect{Hoge.execute 0, 0, 0, 0, 0}.not_to raise_error}.to output.to_stdout
     end
   end
 
