@@ -6,6 +6,10 @@ module Noir::Command
     class << self
 
       def execute args
+        if Noir::Options.exist? Noir::Options::Help
+          description
+          exit
+        end
         puts suggestions(args)
       end
 
