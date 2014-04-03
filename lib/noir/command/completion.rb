@@ -5,6 +5,10 @@ module Noir::Command
 
     class << self
 
+      def execute args
+        puts suggestions(args)
+      end
+
       def suggestions list
         if list.size.zero?
           return suggestions_from_command Noir::Command, nil
