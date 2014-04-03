@@ -17,7 +17,7 @@ module Noir::Command
         command = ((command + commands_from_list).join('::'))
         command = eval(command)
 
-        command.constants(true).map(&:to_s).select{|c| c.downcase.start_with? list.last}
+        command.constants(true).map(&:to_s).map(&:downcase).select{|c| c.start_with? list.last}
       end
 
     end

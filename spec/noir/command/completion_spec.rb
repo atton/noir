@@ -19,5 +19,10 @@ describe 'Noir::Command::Completion' do
     it 'return nil from unmatched pattern' do
       expect(Noir::Command::Completion.suggestions(['piyo'])).to eq([])
     end
+
+    it 'return matched commend name' do
+      expect(Noir::Command::Completion.suggestions(['h'])).to include('hoge')
+      expect(Noir::Command::Completion.suggestions(['h'])).to_not include('fuga')
+    end
   end
 end
