@@ -45,5 +45,10 @@ describe 'Noir::Command::Completion' do
       expect(Noir::Command::Completion.suggestions(list)).to     eq([])
     end
 
+    it 'return matced command name list in sub command' do
+      list = ['hoge', 'subcommand']
+      expect(Noir::Command::Completion.suggestions(list)).to     include('subsubcommand')
+      expect(Noir::Command::Completion.suggestions(list)).to_not include('subcommand')
+    end
   end
 end

@@ -7,28 +7,27 @@ module Noir::Command
 
       def suggestions list
         if list.size.zero?
-          return Noir::Command.constants(true).map(&:to_s).map(&:downcase)
+          return suggestions_from_command Noir::Command, nil
         end
 
-        command  = ['Noir', 'Command']
+        commands  = [:Noir, :Command] + list
 
-        begin
-          # all list elements matched in noir commands.
-          # return sub commands from matched command
-           command = eval((command + list.map(&:capitalize)).join('::'))
-           return suggestions_from_command(command, nil)
-        rescue NameError
-          # not matched all elements
+        matched_commands = [commands.first]
+        commands = commands.drop(1)
+
+        while true
+          consts = eval(matched_commands.map(&:to_s).join('::')).constants(true)
+
+          break if commands.size.zero?
+          matched_command = consts.select{|c| c.to_s.downcase == commands.first.to_s.downcase}.first
+          break if matched_command.nil?
+
+          matched_commands << matched_command
+          commands = commands.drop(1)
         end
 
-        begin
-          # list (exclude last element) matched in noir commands.
-          # return sub commands from matched command with match by last element
-          commands_from_list = list[0..-2].map(&:capitalize)
-          command = eval((command + commands_from_list).join('::'))
-          return suggestions_from_command(command, list.last)
-        end
-
+        command_class = eval(matched_commands.map(&:to_s).join('::'))
+        suggestions_from_command(command_class, commands.first)
       end
 
       def suggestions_from_command klass, pattern = nil
