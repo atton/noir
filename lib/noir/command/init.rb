@@ -5,3 +5,5 @@ module Noir::Command
   end
 
 end
+
+require 'noir/command/init/zsh'
