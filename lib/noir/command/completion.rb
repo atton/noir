@@ -12,14 +12,34 @@ module Noir::Command
 
         command  = ['Noir', 'Command']
 
-        # exist check. delete last elem, check remain elements
-        commands_from_list = list[0..-2].map(&:capitalize)
-        command = ((command + commands_from_list).join('::'))
-        command = eval(command)
+        begin
+          # all list elements matched in noir commands.
+          # return sub commands from matched command
+           command = eval((command + list.map(&:capitalize)).join('::'))
+           return suggestions_from_command(command, nil)
+        rescue NameError
+          # not matched all elements
+        end
 
-        command.constants(true).map(&:to_s).map(&:downcase).select{|c| c.start_with? list.last}
+        begin
+          # list (exclude last element) matched in noir commands.
+          # return sub commands from matched command with match by last element
+          commands_from_list = list[0..-2].map(&:capitalize)
+          command = eval((command + commands_from_list).join('::'))
+          return suggestions_from_command(command, list.last)
+        end
+
       end
 
+      def suggestions_from_command klass, pattern = nil
+        suggests = klass.constants(true).map(&:to_s).map(&:downcase)
+
+        unless pattern.nil?
+          suggests = suggests.select{|c| c.start_with? pattern.downcase}
+        end
+
+        return suggests
+      end
     end
 
   end
