@@ -6,13 +6,18 @@ describe 'Noir::Command::Completion' do
     expect(Noir::Command::Completion.class).to eq(Class)
   end
 
-  describe 'exec' do
+  describe 'suggestions' do
     before do
       stub_commands
     end
 
     it 'return all command from nil' do
-        expect(Noir::Command::Completion.execute([])).to eq(['hoge', 'fuga'])
+        expect(Noir::Command::Completion.suggestions([])).to include('hoge')
+        expect(Noir::Command::Completion.suggestions([])).to include('fuga')
+    end
+
+    it 'return nil from unmatched pattern' do
+      expect(Noir::Command::Completion.suggestions(['piyo'])).to eq([])
     end
   end
 end
