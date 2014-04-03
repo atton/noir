@@ -1,5 +1,6 @@
-require 'noir/command/help'
-require 'noir/command/completion'
-
 module Noir::Command
 end
+
+require 'noir/command/init'
+require 'noir/command/completion'
+require 'noir/command/help'
