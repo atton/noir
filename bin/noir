@@ -1,0 +1,8 @@
+#!/usr/bin/env ruby
+require 'noir'
+
+begin
+  Noir.main
+rescue => e
+  puts e.message
+end
