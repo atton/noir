@@ -26,6 +26,13 @@ module Noir::Base
         consts = constants - superclass.constants
         consts = consts.select{|c| const_get(c).ancestors.include?(Noir::Base::Command)}
       end
+
+      def check_command_not_found command_arr
+        return if command_arr.nil?
+        return if command_arr.empty?
+
+        raise 'command not found : ' + command_arr.first.to_s
+      end
     end
 
   end

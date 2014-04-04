@@ -5,6 +5,8 @@ module Noir::Command
 
     class << self
       def execute *args
+        check_command_not_found args.first
+
         puts 'noir : utilities'
         puts '-----'
 
