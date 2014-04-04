@@ -1,14 +1,11 @@
-module Noir::Command
-  class Init
+class Noir::Command::Init::Zsh < Noir::Base::TerminalCommand
+  @description = "init script for zsh"
 
-    class Zsh < Noir::Base::TerminalCommand
-      @description = "init script for zsh"
+  # enable completion for zsh
+  # wrote this code in .zshrc
+  # if which noir  >& /dev/null; then eval "$(noir init zsh)"; fi
 
-      # enable completion for zsh
-      # wrote this code in .zshrc
-      # if which noir  >& /dev/null; then eval "$(noir init zsh)"; fi
-
-      InitScript = %q(
+  InitScript = %q(
 
 if [[ ! -o interactive ]]; then
   return
@@ -25,14 +22,12 @@ _noir() {
   reply=("${(ps:\n:)completions}")
 }
 
-)
-      class << self
+  )
+  class << self
 
-        def execute *args
-          puts InitScript
-        end
-
-      end
+    def execute *args
+      puts InitScript
     end
+
   end
 end
