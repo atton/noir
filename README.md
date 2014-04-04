@@ -9,7 +9,13 @@ Noir is utility commands for atton.
 
 ## Usage
 
-TODO: Write usage instructions here
+    $ noir <command> [sub-command...] [args-for-command]
+
+## Enable Completion
+
+    Add this code in .zshrc
+
+    ``` if which noir  >& /dev/null; then eval "$(noir init zsh)"; fi ```
 
 ## Contributing
 
