@@ -11,7 +11,7 @@ module Noir
       while !args.empty?
         arg = args.shift
 
-        if matched_command = noir_commands.select{|c| c.downcase == arg.downcase}.first
+        if matched_command = noir_commands.find{|c| c.downcase == arg.downcase}
 
           command_arr << matched_command
           command = eval(command_arr.join('::'))

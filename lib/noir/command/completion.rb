@@ -27,7 +27,7 @@ module Noir::Command
           consts = eval(matched_commands.map(&:to_s).join('::')).constants(true)
 
           break if commands.size.zero?
-          matched_command = consts.select{|c| c.to_s.downcase == commands.first.to_s.downcase}.first
+          matched_command = consts.find{|c| c.to_s.downcase == commands.first.to_s.downcase}
           break if matched_command.nil?
 
           matched_commands << matched_command
