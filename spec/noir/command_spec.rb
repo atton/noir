@@ -2,7 +2,7 @@ require 'noir'
 require 'spec_helper'
 
 describe 'Noir::Command' do
-  it 'is Module' do
-    expect(Noir::Command.class).to eq(Module)
+  it 'is Class' do
+    expect(Noir::Command.class).to eq(Class)
   end
 end

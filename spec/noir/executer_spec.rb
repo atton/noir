@@ -20,8 +20,8 @@ describe 'Noir::Executer' do
         stub_const('Noir::Command::Help', Class.new(Noir::Base::Command))
       end
 
-      it 'return Help' do
-        expect(Noir::Executer.command_from_argv).to eq(Noir::Command::Help)
+      it 'return Noir::Command' do
+        expect(Noir::Executer.command_from_argv).to eq(Noir::Command)
       end
     end
 

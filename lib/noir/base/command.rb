@@ -16,6 +16,9 @@ module Noir::Base
           raise 'called raw Noir::Base::Command.execute. please call it in extended class.'
         end
 
+        # check invalid command
+        check_command_not_found *args
+
         # default execute is show description with sub commands.
         description
         puts '-- sub commands --'
@@ -27,11 +30,10 @@ module Noir::Base
         consts = consts.select{|c| const_get(c).ancestors.include?(Noir::Base::Command)}
       end
 
-      def check_command_not_found command_arr
-        return if command_arr.nil?
-        return if command_arr.empty?
+      def check_command_not_found command=nil, *args
+        return if command.nil?
 
-        raise 'command not found : ' + command_arr.first.to_s
+        raise 'command not found : ' + command
       end
     end
 

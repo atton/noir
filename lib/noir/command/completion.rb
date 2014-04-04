@@ -4,7 +4,7 @@ class Noir::Command::Completion < Noir::Base::TerminalCommand
 
   class << self
 
-    def execute args
+    def execute *args
       if Noir::Options.exist? Noir::Options::Help
         description
         exit

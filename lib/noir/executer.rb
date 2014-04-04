@@ -5,7 +5,6 @@ module Noir
       args          = ARGV.clone
       noir_commands = Noir::Command.constants(true).map(&:to_s)
       command_arr   = ['Noir', 'Command']   # command prefix
-      command       = Noir::Command::Help   # default command
 
 
       while !args.empty?
@@ -28,18 +27,19 @@ module Noir
         end
       end
 
-      return command
+      return command || Noir::Command  # default command
     end
 
     def self.args_from_argv
       argv         = ARGV.clone
-      command_str  = self.command_from_argv.to_s.sub(/^Noir::Command::/, '')
+      command_str  = self.command_from_argv.to_s.sub(/^Noir::Command/, '')
+      command_str  = command_str.sub(/^::/, '')
       command_size = command_str.split('::').size
       return argv.drop(command_size)
     end
 
     def self.execute
-      command_from_argv.execute args_from_argv
+      command_from_argv.execute *args_from_argv
     end
 
   end
