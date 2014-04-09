@@ -39,3 +39,9 @@ class Noir::Command::Edit::WeeklyReport < Noir::Base::Command
 end
 
 require 'noir/command/edit/weekly_report/monday'
+require 'noir/command/edit/weekly_report/tuesday'
+require 'noir/command/edit/weekly_report/wednesday'
+require 'noir/command/edit/weekly_report/thursday'
+require 'noir/command/edit/weekly_report/friday'
+require 'noir/command/edit/weekly_report/saturday'
+require 'noir/command/edit/weekly_report/sunday'
