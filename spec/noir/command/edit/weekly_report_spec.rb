@@ -49,5 +49,48 @@ describe 'Noir::Command::Edit::WeeklyReport' do
       end
     end
 
+    describe 'in has week diff' do
+
+      it '-1 week diff' do
+        expect(Noir::Command::Edit::WeeklyReport.report_name :tuesday, -1).to eq('20140325_20140331')
+      end
+
+      it '-2 week diff' do
+        expect(Noir::Command::Edit::WeeklyReport.report_name :tuesday, -2).to eq('20140318_20140324')
+      end
+
+      it '-3 week diff' do
+        expect(Noir::Command::Edit::WeeklyReport.report_name :tuesday, -3).to eq('20140311_20140317')
+      end
+
+      it '-4 week diff' do
+        expect(Noir::Command::Edit::WeeklyReport.report_name :tuesday, -4).to eq('20140304_20140310')
+      end
+
+      it '-5 week diff' do
+        expect(Noir::Command::Edit::WeeklyReport.report_name :tuesday, -5).to eq('20140225_20140303')
+      end
+
+      it '+1 week diff' do
+        expect(Noir::Command::Edit::WeeklyReport.report_name :tuesday, 1).to eq('20140408_20140414')
+      end
+
+      it '+2 week diff' do
+        expect(Noir::Command::Edit::WeeklyReport.report_name :tuesday, 2).to eq('20140415_20140421')
+      end
+
+      it '+3 week diff' do
+        expect(Noir::Command::Edit::WeeklyReport.report_name :tuesday, 3).to eq('20140422_20140428')
+      end
+
+      it '+4 week diff' do
+        expect(Noir::Command::Edit::WeeklyReport.report_name :tuesday, 4).to eq('20140429_20140505')
+      end
+
+      it '+4 week diff' do
+        expect(Noir::Command::Edit::WeeklyReport.report_name :tuesday, 5).to eq('20140506_20140512')
+      end
+    end
+
   end
 end
