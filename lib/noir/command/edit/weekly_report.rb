@@ -26,10 +26,16 @@ class Noir::Command::Edit::WeeklyReport < Noir::Base::Command
     end
 
 
-    # main method
+    # main methods
+    def edit_report separator_day_of_week, week_diff=0
+      system("vim #{report_name(separator_day_of_week, week_diff)}.txt")
+    end
+
     def report_name separator_day_of_week, week_diff=0
       [begin_of_week_separeted(separator_day_of_week, week_diff).strftime(TimeFormat),
        end_of_week_separeted(separator_day_of_week, week_diff).strftime(TimeFormat)].join('_')
     end
   end
 end
+
+require 'noir/command/edit/weekly_report/monday'
