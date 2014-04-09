@@ -15,6 +15,10 @@ describe 'Noir::Command::Edit::WeeklyReport' do
       end
     end
 
+    it 'is return report_name by mon' do
+      expect(Noir::Command::Edit::WeeklyReport.report_name :monday).to eq('20140331_20140406')
+    end
+
     it 'is return report_name by tuesday' do
       expect(Noir::Command::Edit::WeeklyReport.report_name :tuesday).to eq('20140401_20140407')
     end
