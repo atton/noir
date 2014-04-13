@@ -11,6 +11,7 @@ module Noir
 
       commands    = command.constants(true).map(&:to_s)
       matched_str = commands.find{|c| c.downcase == search_str.downcase}
+      matched_str = find_abbr_command(commands, search_str) if matched_str.nil?
 
       return nil if matched_str.nil?
       matched_arr = command_arr + [matched_str]
@@ -20,6 +21,18 @@ module Noir
       end
 
       return matched_str
+    end
+
+    def self.find_abbr_command commands, search_str
+      # abbrev match
+      matched_commands = commands.select{|c| c.downcase.start_with? search_str}
+
+      return nil if matched_commands.empty?
+      unless matched_commands.size == 1
+        raise "#{search_str} is ambiguous. matched #{matched_commands}"
+      end
+
+      matched_commands.first
     end
 
     def self.command_from_argv
