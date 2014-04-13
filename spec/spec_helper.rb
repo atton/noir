@@ -12,26 +12,30 @@ def stub_commands
   stub_const('Noir::Command::Hoge::SubCommandTwo'                , Class.new(Noir::Base::Command))
   stub_const('Noir::Command::Hoge::SubNonCommand'                , Class.new)
   stub_const('Noir::Command::Fuga'                               , Class.new(Noir::Base::TerminalCommand))
+  stub_const('Noir::Command::FugaFuga'                           , Class.new(Noir::Base::TerminalCommand))
 
+# stub_const is this structure
 =begin
-        # stub_const is this structure
-        module Noir::Command
-          class Hoge < Noir::Base::Command
-            class SubCommand < Noir::Base::Command
-              class SubSubCommand < Noir::Base::Command
-              end
-              class SubSubNonCommand
-              end
-            end
-            class SubCommandTwo < Noir::Base::Command
-            end
-
-            class SubNonCommand
-            end
+    class Noir::Command
+      class Hoge < Noir::Base::Command
+        class SubCommand < Noir::Base::Command
+          class SubSubCommand < Noir::Base::Command
           end
-          class Fuga < Noir::Base::TerminalCommand
+          class SubSubNonCommand
           end
         end
+
+        class SubCommandTwo < Noir::Base::Command
+        end
+
+        class SubNonCommand
+        end
+      end
+      class Fuga < Noir::Base::TerminalCommand
+      end
+      class Fuga < Noir::Base::TerminalCommand
+      end
+    end
 =end
 
 end
