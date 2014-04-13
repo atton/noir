@@ -9,27 +9,28 @@ module Noir
       # finish find by terminal command
       return nil if command.superclass == Noir::Base::TerminalCommand
 
-      commands = command.constants(true).map(&:to_s)
+      commands    = command.constants(true).map(&:to_s)
+      matched_str = commands.find{|c| c.downcase == search_str.downcase}
 
-      commands.find{|c| c.downcase == search_str.downcase}
+      return nil if matched_str.nil?
+      matched_arr = command_arr + [matched_str]
+      unless eval(matched_arr.join('::')).ancestors.include?(Noir::Base::Command)
+        # matched. but matched class is not inherited commmand
+        return nil
+      end
+
+      return matched_str
     end
 
     def self.command_from_argv
       args          = ARGV.clone
-      command_arr   = ['Noir', 'Command']   # command prefix
+      command_arr   = ['Noir', 'Command']   # command prefix and default command
 
       while true
         break unless search_str      = args.shift
         break unless matched_command = find_command(command_arr, search_str)
 
         command_arr << matched_command
-
-        unless eval(command_arr.join('::')).ancestors.include?(Noir::Base::Command)
-          # delete last matched_command.
-          # because this matched class is not inherited Noir::Base::Command
-          command_arr.pop
-          break
-        end
       end
 
       return eval(command_arr.join('::'))
