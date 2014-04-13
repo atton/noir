@@ -80,6 +80,12 @@ describe 'Noir::Executer' do
     end
   end
 
+  describe 'find_command' do
+    it 'return perfect matched command' do
+      expect(Noir::Executer.find_command ['Noir', 'Command'], 'hoge').to eq('Hoge')
+    end
+  end
+
   describe 'args_from_argv' do
 
     describe 'in undefined ARGV' do
