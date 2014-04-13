@@ -23,13 +23,19 @@ describe 'Noir::Executer' do
       it 'return Noir::Command' do
         expect(Noir::Executer.command_from_argv).to eq(Noir::Command)
       end
-    end
+    end # in undefined ARGV
 
-    describe 'in defined argv' do
+    describe 'in defined ARGV' do
 
       it 'return command' do
         stub_const 'ARGV', ['hoge']
         expect(Noir::Executer.command_from_argv).to eq(Noir::Command::Hoge)
+      end
+
+      it 'return prefix duplicated command' do
+        stub_const 'ARGV', ['fuga']
+        expect(Noir::Executer.command_from_argv).to     eq(Noir::Command::Fuga)
+        expect(Noir::Executer.command_from_argv).not_to eq(Noir::Command::FugaFuga)
       end
 
       it 'return command if has other arguments' do
@@ -77,8 +83,41 @@ describe 'Noir::Executer' do
         expect(Noir::Executer.command_from_argv).to eq(Noir::Command::Fuga)
       end
 
+      describe 'abbrev command' do
+
+        it 'return only matched command' do
+          stub_const 'ARGV', ['ho']
+          expect(Noir::Executer.command_from_argv).to eq(Noir::Command::Hoge)
+        end
+
+        it 'raise exception matched one more' do
+          stub_const 'ARGV', ['h']
+          expect{Noir::Executer.command_from_argv}.to raise_error
+        end
+
+        it 'support multi command abbrev' do
+          stub_const 'ARGV', ['ho', 'subcommandt']
+          expect(Noir::Executer.command_from_argv).to eq(Noir::Command::Hoge::SubCommandTwo)
+        end
+
+        it 'support multi command abbrev with args' do
+          stub_const 'ARGV', ['ho', 'subcommandt', 'piyo']
+          expect(Noir::Executer.command_from_argv).to eq(Noir::Command::Hoge::SubCommandTwo)
+        end
+
+      end
+    end # in defined ARGV
+  end # command_from_argv
+
+  describe 'find_command' do
+    it 'return perfect matched command' do
+      expect(Noir::Executer.find_command ['Noir', 'Command'], 'hoge').to eq('Hoge')
     end
-  end
+
+    it 'raise exeption in ambiguous match' do
+      expect{Noir::Executer.find_command(['Noir', 'Command'], 'f')}.to raise_error
+    end
+  end # find_command
 
   describe 'args_from_argv' do
 
@@ -88,9 +127,9 @@ describe 'Noir::Executer' do
       it 'return []' do
         expect(Noir::Executer.args_from_argv).to eq([])
       end
-    end
+    end # in undefined ARGV
 
-    describe 'in defined argv' do
+    describe 'in defined ARGV' do
 
       it 'return [] if only command' do
         stub_const 'ARGV', ['hoge']
@@ -162,6 +201,7 @@ describe 'Noir::Executer' do
         expect(Noir::Executer.args_from_argv).to eq(['aaa', 'bbb'])
       end
 
-    end
-  end
+    end # in defined argv
+
+  end # args_from_argv
 end

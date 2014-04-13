@@ -14,6 +14,7 @@ describe 'Noir::Command::Completion' do
     it 'return all command from nil' do
       expect(Noir::Command::Completion.suggestions([])).to include('hoge')
       expect(Noir::Command::Completion.suggestions([])).to include('fuga')
+      expect(Noir::Command::Completion.suggestions([])).to include('fugafuga')
     end
 
     it 'return nil from unmatched pattern' do
@@ -24,6 +25,7 @@ describe 'Noir::Command::Completion' do
       list = ['h']
       expect(Noir::Command::Completion.suggestions(list)).to     include('hoge')
       expect(Noir::Command::Completion.suggestions(list)).to_not include('fuga')
+      expect(Noir::Command::Completion.suggestions(list)).to_not include('fugafuga')
     end
 
     it 'return command list in sub command' do
