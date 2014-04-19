@@ -11,6 +11,10 @@ module Noir::Base
         raise 'please override in extended class'
       end
 
+      def sub_commands
+        return []
+      end
+
     end
 
   end

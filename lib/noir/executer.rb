@@ -6,19 +6,12 @@ module Noir
     def self.find_command command_arr, search_str
       command = eval(command_arr.join('::'))
 
-      # finish find by terminal command
-      return nil if command.superclass == Noir::Base::TerminalCommand
-
-      commands    = command.constants(true).map(&:to_s)
+      commands    = command.sub_commands.map(&:to_s)
       matched_str = commands.find{|c| c.downcase == search_str.downcase}
       matched_str = find_abbr_command(commands, search_str) if matched_str.nil?
 
       return nil if matched_str.nil?
       matched_arr = command_arr + [matched_str]
-      unless eval(matched_arr.join('::')).ancestors.include?(Noir::Base::Command)
-        # matched. but matched class is not inherited commmand
-        return nil
-      end
 
       return matched_str
     end
