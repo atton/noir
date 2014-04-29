@@ -7,3 +7,5 @@ class Noir::Command::New::Makefile < Noir::Base::Command
     Noir::Command::New.createFile(MakefileName, text)
   end
 end
+
+require 'noir/command/new/makefile/tex'
