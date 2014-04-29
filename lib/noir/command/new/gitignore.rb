@@ -12,3 +12,4 @@ class Noir::Command::New::GitIgnore < Noir::Base::Command
 end
 
 require 'noir/command/new/gitignore/vim'
+require 'noir/command/new/gitignore/tex'
