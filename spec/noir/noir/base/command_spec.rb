@@ -54,6 +54,7 @@ describe 'Noir::Base::Command' do
         stub_const('Hoge::SubCommand'                   , Class.new(Noir::Base::Command))
         stub_const('Hoge::SubCommand::SubSubCommand'    , Class.new(Noir::Base::Command))
         stub_const('Hoge::SubCommand::SubSubNonCommand' , Class.new)
+        stub_const('Hoge::SubCommand::NotCommand'       , :not_command)
         stub_const('Hoge::SubCommandTwo'                , Class.new(Noir::Base::Command))
         stub_const('Hoge::SubNonCommand'                , Class.new)
 
@@ -110,6 +111,10 @@ describe 'Noir::Base::Command' do
 
         it 'not include self class' do
           expect(@commands).not_to include(:SubCommand)
+        end
+
+        it 'not include non class const' do
+          expect(@commands).not_to include(:not_command)
         end
 
       end
