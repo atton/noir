@@ -1,5 +1,5 @@
 class Noir::Command::Edit::WeeklyReport::Monday < Noir::Base::TerminalCommand
-  @describe = 'edit weekly report separated by monday'
+  @description = 'edit weekly report separated by monday'
 
   class << self
     def execute *args
