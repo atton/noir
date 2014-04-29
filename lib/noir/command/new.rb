@@ -1,5 +1,12 @@
 class Noir::Command::New < Noir::Base::Command
   @description = 'Create new files'
+
+  def self.createFile filename, text=''
+    File.open(filename, 'w') do |file|
+      file.write(text)
+    end
+  end
+
 end
 
 require 'noir/command/new/note'

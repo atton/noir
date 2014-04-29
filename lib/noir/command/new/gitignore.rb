@@ -4,9 +4,7 @@ class Noir::Command::New::GitIgnore < Noir::Base::Command
   GitIgnoreName = '.gitignore'
 
   def self.createGitIgnore text
-    File.open(GitIgnoreName, 'w') do |file|
-      file.write(text)
-    end
+    Noir::Command::New.createFile(GitIgnoreName, text)
   end
 
 end
