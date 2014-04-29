@@ -204,4 +204,30 @@ describe 'Noir::Executer' do
     end # in defined argv
 
   end # args_from_argv
+
+  describe 'execute' do
+    let(:mock_command) { double('Noir::Base::Command') }
+
+    before do
+      stub_const 'Noir::Executer', Noir::Executer
+      allow(Noir::Executer).to receive(:command_from_argv).and_return(mock_command)
+
+      allow(mock_command).to receive(:execute).and_return(:call_execute)
+      allow(mock_command).to receive(:description).and_return(:call_description)
+    end
+
+    it 'not has help flag. execute command.execute' do
+      expect(Noir::Executer.execute).to eq(:call_execute)
+    end
+
+    it 'has help option. execute command.describe' do
+      stub_const 'ARGV', ['-h']
+      expect(Noir::Executer.execute).to eq(:call_description)
+    end
+
+    it 'has log help option. execute command.describe' do
+      stub_const 'ARGV', ['--help']
+      expect(Noir::Executer.execute).to eq(:call_description)
+    end
+  end # execute
 end

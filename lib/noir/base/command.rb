@@ -27,7 +27,10 @@ module Noir::Base
 
       def sub_commands
         consts = constants - superclass.constants
-        consts = consts.select{|c| const_get(c).ancestors.include?(Noir::Base::Command)}
+        consts = consts.select do |const|
+          const_get(const).class == Class &&
+          const_get(const).ancestors.include?(Noir::Base::Command)
+        end
       end
 
       def check_command_not_found command=nil, *args
