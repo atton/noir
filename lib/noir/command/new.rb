@@ -3,7 +3,7 @@ class Noir::Command::New < Noir::Base::Command
 
   def self.createFile filename, text=''
     File.open(filename, 'w') do |file|
-      file.write(text)
+      file.write(text.sub(/^\n/, ''))
     end
   end
 
