@@ -53,6 +53,12 @@ module Noir
     # inherited methods
 
     def self.execute
+      Noir::Options.parse_options_from_argv!
+
+      if Noir::Options.exist? Noir::Options::Help
+        return command_from_argv.description
+      end
+
       command_from_argv.execute *args_from_argv
     end
 

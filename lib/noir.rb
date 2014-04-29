@@ -7,7 +7,6 @@ require 'noir/command'
 
 module Noir
   def self.main
-    Noir::Options.parse_options_from_argv!
     Noir::Executer.execute
   end
 end
