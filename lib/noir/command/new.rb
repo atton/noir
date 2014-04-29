@@ -4,3 +4,4 @@ end
 
 require 'noir/command/new/note'
 require 'noir/command/new/gitignore'
+require 'noir/command/new/makefile'
