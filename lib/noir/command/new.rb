@@ -3,3 +3,4 @@ class Noir::Command::New < Noir::Base::Command
 end
 
 require 'noir/command/new/note'
+require 'noir/command/new/gitignore'
