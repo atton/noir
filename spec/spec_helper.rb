@@ -10,6 +10,7 @@ def stub_commands
   stub_const('Noir::Command::Hoge::SubCommand::SubSubCommand'    , Class.new(Noir::Base::Command))
   stub_const('Noir::Command::Hoge::SubCommand::SubSubNonCommand' , Class.new)
   stub_const('Noir::Command::Hoge::SubCommandTwo'                , Class.new(Noir::Base::Command))
+  stub_const('Noir::Command::Hoge::Piyo'                         , :piyo)
   stub_const('Noir::Command::Hoge::SubNonCommand'                , Class.new)
   stub_const('Noir::Command::Fuga'                               , Class.new(Noir::Base::TerminalCommand))
   stub_const('Noir::Command::FugaFuga'                           , Class.new(Noir::Base::TerminalCommand))
@@ -30,10 +31,11 @@ def stub_commands
 
         class SubNonCommand
         end
+        Piyo = :piyo
       end
       class Fuga < Noir::Base::TerminalCommand
       end
-      class Fuga < Noir::Base::TerminalCommand
+      class FugaFuga < Noir::Base::TerminalCommand
       end
     end
 =end
