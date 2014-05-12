@@ -34,7 +34,7 @@ class Noir::Command::Completion < Noir::Base::TerminalCommand
     end
 
     def suggestions_from_command klass, pattern = nil
-      suggests = klass.constants(true).map(&:to_s).map(&:downcase)
+      suggests = klass.sub_commands.map(&:to_s).map(&:downcase)
 
       unless pattern.nil?
         suggests = suggests.select{|c| c.start_with? pattern.downcase}

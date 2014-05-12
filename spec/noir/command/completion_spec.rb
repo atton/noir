@@ -18,7 +18,11 @@ describe 'Noir::Command::Completion' do
     end
 
     it 'return nil from unmatched pattern' do
-      expect(Noir::Command::Completion.suggestions(['piyo'])).to eq([])
+      expect(Noir::Command::Completion.suggestions(['poyo'])).to eq([])
+    end
+
+    it 'not has non-class constant' do
+      expect(Noir::Command::Completion.suggestions(['hoge'])).to_not include(:piyo)
     end
 
     it 'return matched command name' do
