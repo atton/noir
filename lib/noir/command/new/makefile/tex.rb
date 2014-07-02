@@ -14,16 +14,21 @@ $(TARGET).dvi : $(wildcard **/*.tex) $(TARGET).tex
 	platex $(TARGET).tex
 	platex $(TARGET).tex
 
+
 # commands
-.PHONY : all open clean
-
-all : $(TARGET).pdf
-
-open : $(TARGET).pdf
-	open $(TARGET).pdf
+.PHONY : clean all open remake
 
 clean:
 	rm -f *.dvi *.aux *.log *.pdf *.ps *.gz *.bbl *.blg *.toc *~ *.core
+
+all: $(TARGET).pdf
+
+open: $(TARGET).pdf
+	open $(TARGET).pdf
+
+remake:
+	make clean
+	make all
 )
 
   def self.execute *args
