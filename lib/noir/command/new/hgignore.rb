@@ -10,3 +10,4 @@ class Noir::Command::New::HgIgnore < Noir::Base::Command
 end
 
 require 'noir/command/new/hgignore/tex'
+require 'noir/command/new/hgignore/vim'
