@@ -13,9 +13,9 @@ Noir is utility commands for atton.
 
 ## Enable Completion
 
-    Add this code in .zshrc
+Add this code in .zshrc
 
-    ``` if which noir  >& /dev/null; then eval "$(noir init zsh)"; fi ```
+    if which noir  >& /dev/null; then eval "$(noir init zsh)"; fi
 
 ## Contributing
 
