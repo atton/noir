@@ -1,4 +1,5 @@
 # Noir
+[![Gem Version](https://badge.fury.io/rb/noir.svg)](http://badge.fury.io/rb/noir)
 
 Noir is utility commands for atton.
 
