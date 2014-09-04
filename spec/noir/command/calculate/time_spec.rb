@@ -113,4 +113,15 @@ describe 'Noir::Command::Calculate::Time' do
     end
   end
 
+  describe '.calc_total' do
+    it 'is return 0 when time_pair is empty' do
+      expect(Noir::Command::Calculate::Time.calc_total []).to eq(0)
+    end
+
+    it 'is return summed time diff' do
+      dummy_params = [[5, 10], [20, 100]]
+      expect(Noir::Command::Calculate::Time.calc_total dummy_params).to eq(85)
+    end
+  end
+
 end

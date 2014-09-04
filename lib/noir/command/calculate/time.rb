@@ -49,7 +49,7 @@ class Noir::Command::Calculate::Time < Noir::Base::TerminalCommand
     end
 
     def calc_total time_pairs
-      time_pairs.map{|start, finish| finish - start}.inject(:+)
+      time_pairs.map{|start, finish| finish - start}.inject(:+) || 0
     end
 
     def print_file_total file, time_pairs
