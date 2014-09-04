@@ -29,7 +29,7 @@ class Noir::Command::Calculate::Time < Noir::Base::TerminalCommand
       return path if File.file?(path)
 
       if File.directory?(path)
-        return Dir.entries(path).reject{|filename| filename.start_with?('.')}
+        return Dir.entries(path).reject{|filename| filename.start_with?('.') || File.directory?(filename)}
       end
 
       raise "Invalid path. please input file or directory #{path}"

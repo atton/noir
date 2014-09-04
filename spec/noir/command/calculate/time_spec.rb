@@ -47,15 +47,29 @@ describe 'Noir::Command::Calculate::Time' do
     it 'is return extracted path by exist directory path' do
       @paths.each do |path|
         path_is_directory @path
-        allow(Dir).to receive(:entries).with(@path).and_return([@path])
-        expect(Noir::Command::Calculate::Time.extract_path(@path)).to eq([@path])
+        entry_of_directory = 'hoge'
+        allow(Dir).to receive(:entries).with(@path).and_return([entry_of_directory])
+        allow(File).to receive(:directory?).with(entry_of_directory).and_return(false)
+        expect(Noir::Command::Calculate::Time.extract_path(@path)).to eq([entry_of_directory])
       end
     end
 
     it 'is return extracted path rejected start_with by exist directory path' do
       path_is_directory @path
-      allow(Dir).to  receive(:entries).with(@path).and_return(['aaa', '.aaa', 'bbb', '.bbb', 'ccc'])
+      entries_of_directory = ['aaa', '.aaa', 'bbb', '.bbb', 'ccc']
+      entries_of_directory.each do |entry|
+        allow(File).to receive(:directory?).with(entry).and_return(false)
+      end
+      allow(Dir).to  receive(:entries).with(@path).and_return(entries_of_directory)
       expect(Noir::Command::Calculate::Time.extract_path(@path)).to eq(["aaa", "bbb", "ccc"])
+    end
+
+    it 'is return extracted path rejected directory' do
+      path_is_directory @path
+      allow(Dir).to  receive(:entries).with(@path).and_return(['aaa', 'bbb'])
+      allow(File).to receive(:directory?).with('aaa').and_return(false)
+      allow(File).to receive(:directory?).with('bbb').and_return(true)
+      expect(Noir::Command::Calculate::Time.extract_path(@path)).to eq(['aaa'])
     end
   end
 
