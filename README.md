@@ -1,5 +1,6 @@
 # Noir
 [![Gem Version](https://badge.fury.io/rb/noir.svg)](http://badge.fury.io/rb/noir)
+[![Build Status](https://travis-ci.org/atton-/noir.svg)](https://travis-ci.org/atton-/noir)
 
 Noir is utility commands for atton.
 
