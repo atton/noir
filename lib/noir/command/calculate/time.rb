@@ -11,6 +11,17 @@ class Noir::Command::Calculate::Time < Noir::Base::TerminalCommand
       raise 'Please input target on commant arguments. (directory or .txt file)' if args.size.zero?
 
       files = args.map{|f| extract_path(f)}.flatten
+
+      time_pairs = files.map{|f| pick_up_times(f)}
+
+      total_time = 0
+      files.zip(time_pairs) do |file, pairs|
+        print_file_total file, pairs
+        total_time += calc_total(pairs)
+        puts '-----'
+      end
+
+      puts "all total time : #{seconds_to_string(total_time)}"
     end
 
     def extract_path path
@@ -35,6 +46,34 @@ class Noir::Command::Calculate::Time < Noir::Base::TerminalCommand
       raise "Formatted time was not sorted in #{path}" unless times.sort == times
 
       diffs = times.map.each_slice(2).to_a
+    end
+
+    def calc_total time_pairs
+      time_pairs.map{|start, finish| finish - start}.inject(:+)
+    end
+
+    def print_file_total file, time_pairs
+      if time_pairs.empty?
+        puts("Formatted time not found in : #{file}")
+        return
+      end
+
+      puts file
+
+      time_pairs.each do |start, finish|
+        diff = finish - start
+        puts "#{start.strftime(TimeFormat)} => #{finish.strftime(TimeFormat)} : #{seconds_to_string(diff)}"
+      end
+
+      puts "file total : #{seconds_to_string(calc_total(time_pairs))}"
+    end
+
+    def seconds_to_string time_sec
+      hours    = time_sec.to_i / 3600
+      mins     = (time_sec - (3600 * hours)) / 60
+      seconds  = (time_sec - (3600 * hours)) % 60
+
+      format("%d:%02d:%02d", hours, mins, seconds)
     end
   end
 end

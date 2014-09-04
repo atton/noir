@@ -88,4 +88,15 @@ describe 'Noir::Command::Calculate::Time' do
     end
   end
 
+  describe '.print_file_total' do
+    it 'is output "not found" when time_pairs was empty' do
+      expect{ Noir::Command::Calculate::Time.print_file_total(@path, []) }.to output(/not found in .* #{@path}/ ).to_stdout
+    end
+
+    it 'is output when time_pairs was not empty' do
+      expect{ Noir::Command::Calculate::Time.print_file_total(@path, [[Time.new(2014, 9, 4, 18, 49),
+                                                                       Time.new(2014, 9, 4, 21, 9, 43)]]) }.to output(/total/).to_stdout
+    end
+  end
+
 end
