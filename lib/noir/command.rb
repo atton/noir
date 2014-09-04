@@ -10,6 +10,8 @@ end
 
 require 'noir/command/init'
 require 'noir/command/completion'
+
+require 'noir/command/calculate'
+require 'noir/command/edit'
 require 'noir/command/help'
 require 'noir/command/new'
-require 'noir/command/edit'
