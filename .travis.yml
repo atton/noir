@@ -5,5 +5,6 @@ rvm:
   - 1.9.3
   - 1.9.2
 notifications:
+  email: false
   slack:
     secure: dSwRumGlIAdGDAaH/fzh/KsQhRqPBcNpbGYrMbAzacFMm8nGyLCShxR3EP/ZxkBp14ZsJ8ys4F5DMVlri7EbGNgBf1nOKAtzme6lV8oqrUxW2QULgvrP4W/+xTg1ULX758qF5NgwqErfS4Y1etofMbOuGriJ6kIxFWRjidmFPYo=
