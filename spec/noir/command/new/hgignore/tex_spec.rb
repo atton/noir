@@ -8,7 +8,7 @@ describe 'Noir::Command::New::HgIgnore::Tex' do
 
   it 'is create .hgignore by Noir::Command::New.createFile' do
     allow(Noir::Command::New).to receive(:createFile)
-    expect(Noir::Command::New).to receive(:createFile).with('.hgignore', anything)
+    expect(Noir::Command::New).to receive(:createFile).with('.hgignore', /dvi/)
     Noir::Command::New::HgIgnore::Tex.execute
   end
 end

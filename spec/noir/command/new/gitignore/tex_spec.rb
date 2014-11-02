@@ -8,7 +8,7 @@ describe 'Noir::Command::New::GitIgnore::Tex' do
 
   it 'is create .gitignore by Noir::Command::New.createFile' do
     allow(Noir::Command::New).to receive(:createFile)
-    expect(Noir::Command::New).to receive(:createFile).with('.gitignore', anything)
+    expect(Noir::Command::New).to receive(:createFile).with('.gitignore', /dvi/)
     Noir::Command::New::GitIgnore::Tex.execute
   end
 end
