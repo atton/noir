@@ -11,6 +11,7 @@ syntax: glob
 *.dvi
 *.pdf
 *.toc
+*.cpt
 )
 
   def self.execute *args

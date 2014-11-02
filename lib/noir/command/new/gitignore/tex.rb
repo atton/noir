@@ -9,6 +9,7 @@ class Noir::Command::New::GitIgnore::Tex < Noir::Base::TerminalCommand
 *.dvi
 *.pdf
 *.toc
+*.cpt
 )
 
   def self.execute *args

@@ -19,7 +19,7 @@ $(TARGET).dvi : $(wildcard **/*.tex) $(TARGET).tex
 .PHONY : clean all open remake
 
 clean:
-	rm -f *.dvi *.aux *.log *.pdf *.ps *.gz *.bbl *.blg *.toc *~ *.core
+	rm -f *.dvi *.aux *.log *.pdf *.ps *.gz *.bbl *.blg *.toc *~ *.core *.cpt
 
 all: $(TARGET).pdf
 
