@@ -28,10 +28,10 @@ class Noir::Command::New::GitIgnore < Noir::Base::TerminalCommand
 
 
 
-  def self.gitignore_texts_from_kinds kinds
+  def self.ignore_texts_from_kinds kinds
     kinds = kinds.map(&:downcase).map(&:to_sym)
     if kinds.empty?
-      raise "Please input some kinds of .gitignore\n supported: #{SupportedKinds}"
+      raise "Please input some kinds of ignore\n supported: #{SupportedKinds}"
     end
     unless kinds.all?{|k| GitIgnoreTexts.constants.map(&:downcase).include?(k)}
       raise 'Unsupported kinds'
@@ -48,6 +48,6 @@ class Noir::Command::New::GitIgnore < Noir::Base::TerminalCommand
 
   @description = 'Create new .gitignore. supported kinds:' + SupportedKinds
   def self.execute *args
-    createGitIgnore gitignore_texts_from_kinds(args)
+    createGitIgnore ignore_texts_from_kinds(args)
   end
 end
