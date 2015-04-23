@@ -5,16 +5,17 @@ class Noir::Command::New::GitIgnore < Noir::Base::TerminalCommand
 )
 
     TeX = %q(
+*.aux
 *.bbl
 *.blg
+*.cpt
+*.dvi
 *.lof
+*.log
 *.lol
 *.lot
-*.log
-*.aux
-*.dvi
 *.toc
-*.cpt
+*.xbb
 )
 
   Agda = %q(
