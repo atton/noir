@@ -8,7 +8,7 @@ describe 'Noir::Command::New::HgIgnore' do
 
   it 'is create .hgignore' do
     allow(Noir::Command::New).to  receive(:createFile)
-    expect(Noir::Command::New).to receive(:createFile).with('.hgignore', /.swp/)
+    expect(Noir::Command::New).to receive(:createFile).with('.hgignore', /glob/)
     Noir::Command::New::HgIgnore.execute('vim')
   end
 
