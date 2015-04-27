@@ -7,11 +7,13 @@ class Noir::Command::Format::PDFURL < Noir::Base::TerminalCommand
     raise 'URL Missing. Please input a link in argument.'if args.empty?
 
     args.each do |url|
-      pdf_url = URI.decode_www_form(url).find{|a| a.first == 'url'} || ['PDF URL missing']
-      puts pdf_url.last
+      if URI.regexp.match(url)
+        puts URI.decode_www_form(url).find{|a| a.first == 'url'}
+      else
+        puts 'PDF URL missing'
+      end
     end
 
   end
-
 end
 
