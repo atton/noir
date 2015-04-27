@@ -217,6 +217,7 @@ describe 'Noir::Executer' do
     end
 
     it 'not has help flag. execute command.execute' do
+      stub_const 'ARGV', []
       expect(Noir::Executer.execute).to eq(:call_execute)
     end
 

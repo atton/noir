@@ -13,5 +13,6 @@ require 'noir/command/completion'
 
 require 'noir/command/calculate'
 require 'noir/command/edit'
+require 'noir/command/format'
 require 'noir/command/help'
 require 'noir/command/new'
