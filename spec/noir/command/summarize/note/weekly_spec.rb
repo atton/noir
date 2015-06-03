@@ -30,6 +30,14 @@ describe 'Noir::Command::Summarize::Note::Weekly' do
       expect{Noir::Command::Summarize::Note::Weekly.summarize_by_week(:wednesday)}.not_to output(/fuga/).to_stdout
       expect{Noir::Command::Summarize::Note::Weekly.summarize_by_week(:wednesday)}.not_to output(/piyo/).to_stdout
     end
+  end
 
+  describe 'sub commands' do
+    [:monday, :tuesday, :wednesday, :thursday, :friday, :saturday, :sunday].each do |day|
+      it 'is inherited Noir::Base::TerminalCommand' do
+        sub_command = Noir::Command::Summarize::Note::Weekly.const_get day.capitalize
+        expect(sub_command.superclass).to eq(Noir::Base::TerminalCommand)
+      end
+    end
   end
 end

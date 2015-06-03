@@ -13,4 +13,18 @@ class Noir::Command::Summarize::Note::Weekly < Noir::Base::Command
   end
 end
 
-require 'noir/command/summarize/note/weekly/monday'
+# Sub commands: specific day of week
+[:monday, :tuesday, :wednesday, :thursday, :friday, :saturday, :sunday].each do |day|
+  clazz = Class.new(Noir::Base::TerminalCommand)
+  clazz.class_eval do
+    @description = "summarize notes weekly separated by #{day}"
+    @day_of_week = day
+  end
+  clazz.class_eval do
+    def self.execute *args
+      week_diff = args.first.to_i || 0
+      Noir::Command::Summarize::Note::Weekly.summarize_by_week @day_of_week, week_diff
+    end
+  end
+  Noir::Command::Summarize::Note::Weekly.const_set(day.capitalize, clazz)
+end
