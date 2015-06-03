@@ -51,3 +51,13 @@ shared_context :dependencie_on_current_directory do
     end
   end
 end
+
+# for ruby 1.9.2
+
+unless File.respond_to?(:write)
+  class File
+    def self.write filename, contents
+      open(filename, 'w'){|f| f.write(contents)}
+    end
+  end
+end
