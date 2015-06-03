@@ -41,3 +41,23 @@ def stub_commands
 =end
 
 end
+
+shared_context :dependencie_on_current_directory do
+  around do |spec|
+    Dir.mktmpdir('noir-tempdir') do |dir|
+      Dir.chdir(dir) do
+        spec.run
+      end
+    end
+  end
+end
+
+# for ruby 1.9.2
+
+unless File.respond_to?(:write)
+  class File
+    def self.write filename, contents
+      open(filename, 'w'){|f| f.write(contents)}
+    end
+  end
+end

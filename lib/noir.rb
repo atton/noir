@@ -3,6 +3,7 @@ require 'noir/options'
 require 'noir/executer'
 require 'noir/base'
 require 'noir/base/terminal_command'
+require 'noir/util'
 require 'noir/command'
 
 module Noir
