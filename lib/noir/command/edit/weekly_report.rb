@@ -15,10 +15,17 @@ class Noir::Command::Edit::WeeklyReport < Noir::Base::Command
   end
 end
 
-require 'noir/command/edit/weekly_report/monday'
-require 'noir/command/edit/weekly_report/tuesday'
-require 'noir/command/edit/weekly_report/wednesday'
-require 'noir/command/edit/weekly_report/thursday'
-require 'noir/command/edit/weekly_report/friday'
-require 'noir/command/edit/weekly_report/saturday'
-require 'noir/command/edit/weekly_report/sunday'
+[:monday, :tuesday, :wednesday, :thursday, :friday, :saturday, :sunday].each do |day|
+  clazz = Class.new(Noir::Base::TerminalCommand)
+  clazz.class_eval do
+    @description = "edit weekly report separated by #{day}"
+    @day_of_week = day
+  end
+  clazz.class_eval do
+    def self.execute *args
+      week_diff = args.first.to_i || 0
+      Noir::Command::Edit::WeeklyReport.edit_report @day_of_week, week_diff
+    end
+  end
+  Noir::Command::Edit::WeeklyReport.const_set(day.capitalize, clazz)
+end
