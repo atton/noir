@@ -41,3 +41,13 @@ def stub_commands
 =end
 
 end
+
+shared_context :dependencie_on_current_directory do
+  around do |spec|
+    Dir.mktmpdir('noir-tempdir') do |dir|
+      Dir.chdir(dir) do
+        spec.run
+      end
+    end
+  end
+end
