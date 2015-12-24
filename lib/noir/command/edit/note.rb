@@ -26,7 +26,7 @@ class Noir::Command::Edit::Note < Noir::Base::TerminalCommand
     def edit_before_note diff
       notes = Dir.glob(Noir::Command::New::Note::FileNameGlob)
       if notes.size > diff.abs.succ
-        edit notes[diff-1]
+        edit notes.sort_by(&:to_i)[diff-1]
       else
         raise "Cannot find notes before #{diff} count."
       end

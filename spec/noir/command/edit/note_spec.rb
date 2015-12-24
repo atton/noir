@@ -32,6 +32,18 @@ describe 'Noir::Command::Edit::Note' do
       Noir::Command::Edit::Note.execute '-3'
     end
 
+    it 'is edit before note if set negative number in range (shuffled)' do
+      allow(Dir).to receive(:glob).with(anything).and_return([1, 2, 3, 4, 5].shuffle)
+      expect(Noir::Command::Edit::Note).to receive(:edit).with(2)
+      Noir::Command::Edit::Note.execute '-3'
+    end
+
+    it 'is edit before note if set negative number in range (over 100)' do
+      allow(Dir).to receive(:glob).with(anything).and_return(['100_', '101_3', '99_x', '01_', '200_e'].shuffle)
+      expect(Noir::Command::Edit::Note).to receive(:edit).with('99_x')
+      Noir::Command::Edit::Note.execute '-3'
+    end
+
     it 'returns error if set negative number out of range' do
       allow(Dir).to receive(:glob).with(anything).and_return([1, 2, 3, 4, 5])
       expect(Noir::Command::Edit::Note).to_not receive(:edit)
@@ -39,6 +51,7 @@ describe 'Noir::Command::Edit::Note' do
         expect{Noir::Command::Edit::Note.execute(n.to_s)}.to raise_error(/Cannot/)
       end
     end
+
   end
 
 end
