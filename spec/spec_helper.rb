@@ -58,13 +58,3 @@ def dependent_time_now
     allow(Time).to receive(:now).and_return(Time.new(2014, 4, 1))
   end
 end
-
-# for ruby 1.9.2
-
-unless File.respond_to?(:write)
-  class File
-    def self.write filename, contents
-      open(filename, 'w'){|f| f.write(contents)}
-    end
-  end
-end
