@@ -4,7 +4,7 @@ class Noir::Command::Help < Noir::Base::TerminalCommand
 
   class << self
     def execute *args
-      check_command_not_found *args
+      check_command_not_found(*args)
 
       puts 'noir : utilities'
       puts '-----'

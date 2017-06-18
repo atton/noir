@@ -1,4 +1,5 @@
 require 'noir'
+require 'rspec/temp_dir'
 
 $LOAD_PATH << File.expand_path('../../lib', __FILE__)
 
@@ -43,21 +44,17 @@ def stub_commands
 end
 
 shared_context :dependencie_on_current_directory do
+  include_context 'uses temp dir'
   around do |spec|
-    Dir.mktmpdir('noir-tempdir') do |dir|
-      Dir.chdir(dir) do
-        spec.run
-      end
+    Dir.chdir(temp_dir) do
+      spec.run
     end
   end
 end
 
-# for ruby 1.9.2
-
-unless File.respond_to?(:write)
-  class File
-    def self.write filename, contents
-      open(filename, 'w'){|f| f.write(contents)}
-    end
+def dependent_time_now
+  before (:each) do
+    # test date is 2014/04/01
+    allow(Time).to receive(:now).and_return(Time.new(2014, 4, 1))
   end
 end

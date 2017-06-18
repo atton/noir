@@ -11,7 +11,6 @@ module Noir
       matched_str = find_abbr_command(commands, search_str) if matched_str.nil?
 
       return nil if matched_str.nil?
-      matched_arr = command_arr + [matched_str]
 
       return matched_str
     end
@@ -59,7 +58,7 @@ module Noir
         return command_from_argv.description
       end
 
-      command_from_argv.execute *args_from_argv
+      command_from_argv.execute(*args_from_argv)
     end
 
   end

@@ -7,16 +7,10 @@ describe 'Noir::Command::Edit::WeeklyReport' do
   end
 
   describe '.report_name' do
-    before do
-      class Time
-        def self.now
-          Time.new(2014, 4, 1)  # test date is 2014/04/01
-        end
-      end
-    end
+    dependent_time_now
 
     it 'is raise invalid weekly separator' do
-      expect{Noir::Command::Edit::WeeklyReport.report_name :unknown}.to raise_error
+      expect{Noir::Command::Edit::WeeklyReport.report_name :unknown}.to raise_error(RuntimeError)
     end
 
     describe 'in no week diff' do

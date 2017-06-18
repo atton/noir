@@ -12,7 +12,7 @@ describe 'Noir::Command::Calculate::Time' do
   end
 
   it 'is raise exception when non-arguments' do
-    expect{ Noir::Command::Calculate::Time.execute }.to raise_error
+    expect{ Noir::Command::Calculate::Time.execute }.to raise_error(RuntimeError)
   end
 
   describe '.extract_directory' do

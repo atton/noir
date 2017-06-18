@@ -7,6 +7,6 @@ describe 'Noir::Command::Init::Zsh' do
   end
 
   it 'is output in execute' do
-    expect{expect{Noir::Command::Init::Zsh.execute []}.to output.to_stdout}.to_not raise_error
+    expect{expect{Noir::Command::Init::Zsh.execute []}.to output.to_stdout}.to_not raise_exception
   end
 end

@@ -14,11 +14,11 @@ describe 'Noir::Command::New::GitIgnore' do
 
   describe '.ignore_texts_from_kinds' do
     it 'is raise error when arguments is empty' do
-      expect{Noir::Command::New::GitIgnore.ignore_texts_from_kinds([])}.to raise_error(/input/)
+      expect{Noir::Command::New::GitIgnore.ignore_texts_from_kinds([])}.to raise_error(RuntimeError, /input/)
     end
 
     it 'is raise errors when arguments has invalid kinds' do
-      expect{Noir::Command::New::GitIgnore.ignore_texts_from_kinds(['hoge'])}.to raise_error(/Un/)
+      expect{Noir::Command::New::GitIgnore.ignore_texts_from_kinds(['hoge'])}.to raise_error(RuntimeError, /Un/)
     end
 
     it 'is same text when valid a kind' do
