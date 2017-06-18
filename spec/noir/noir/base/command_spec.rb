@@ -21,7 +21,7 @@ describe 'Noir::Base::Command' do
     it 'not effect that set description into superclass to subclass' do
       Noir::Base::Command.class_variable_set :@@description, "hoge"
       stub_const('Hoge', Class.new(Noir::Base::Command))
-      expect{Hoge.description}.to raise_error
+      expect{Hoge.description}.to raise_error(RuntimeError)
       Noir::Base::Command.class_variable_set :@@description, nil
     end
   end
@@ -34,7 +34,7 @@ describe 'Noir::Base::Command' do
     end
 
     it 'raise exception if called in extended class but undefined description' do
-      expect{Hoge.execute}.to raise_error
+      expect{Hoge.execute}.to raise_error(RuntimeError)
     end
 
     it 'output description if called in extended class and defined description' do

@@ -48,7 +48,7 @@ describe 'Noir::Command::Edit::Note' do
       allow(Dir).to receive(:glob).with(anything).and_return([1, 2, 3, 4, 5])
       expect(Noir::Command::Edit::Note).to_not receive(:edit)
       [-4,-5,-6].each do |n|
-        expect{Noir::Command::Edit::Note.execute(n.to_s)}.to raise_error(/Cannot/)
+        expect{Noir::Command::Edit::Note.execute(n.to_s)}.to raise_error(RuntimeError, /Cannot/)
       end
     end
 

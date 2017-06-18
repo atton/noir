@@ -46,6 +46,8 @@ class Noir::Command::Calculate::Time < Noir::Base::TerminalCommand
       raise "Formatted time was not sorted in #{path}" unless times.sort == times
 
       diffs = times.map.each_slice(2).to_a
+
+      return diffs
     end
 
     def calc_total time_pairs

@@ -17,7 +17,7 @@ module Noir::Base
         end
 
         # check invalid command
-        check_command_not_found *args
+        check_command_not_found(*args)
 
         # default execute is show description with sub commands.
         description

@@ -1,7 +1,7 @@
 require 'noir'
 require 'spec_helper'
 
-describe 'Noir::Command::Edit' do
+describe 'Noir::Command::Format::PDFURL' do
   it 'is inherited Noir::Base::Terminalcommand' do
     expect(Noir::Command::Format::PDFURL.superclass).to eq(Noir::Base::TerminalCommand)
   end

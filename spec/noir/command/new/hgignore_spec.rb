@@ -13,11 +13,11 @@ describe 'Noir::Command::New::HgIgnore' do
   end
 
   it 'is raise when arguments is empty by .ignore_texts_from_kinds' do
-    expect{Noir::Command::New::HgIgnore.execute}.to raise_error(/input/)
+    expect{Noir::Command::New::HgIgnore.execute}.to raise_error(RuntimeError, /input/)
   end
 
   it 'is raise when arguments includes invalid kinds' do
-    expect{Noir::Command::New::HgIgnore.execute('hoge')}.to raise_error(/Unsupported kinds/)
+    expect{Noir::Command::New::HgIgnore.execute('hoge')}.to raise_error(RuntimeError, /Unsupported kinds/)
   end
 
 

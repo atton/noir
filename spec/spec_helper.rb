@@ -52,6 +52,13 @@ shared_context :dependencie_on_current_directory do
   end
 end
 
+def dependent_time_now
+  before (:each) do
+    # test date is 2014/04/01
+    allow(Time).to receive(:now).and_return(Time.new(2014, 4, 1))
+  end
+end
+
 # for ruby 1.9.2
 
 unless File.respond_to?(:write)

@@ -92,7 +92,7 @@ describe 'Noir::Executer' do
 
         it 'raise exception matched one more' do
           stub_const 'ARGV', ['h']
-          expect{Noir::Executer.command_from_argv}.to raise_error
+          expect{Noir::Executer.command_from_argv}.to raise_error(RuntimeError)
         end
 
         it 'support multi command abbrev' do
@@ -115,7 +115,7 @@ describe 'Noir::Executer' do
     end
 
     it 'raise exeption in ambiguous match' do
-      expect{Noir::Executer.find_command(['Noir', 'Command'], 'f')}.to raise_error
+      expect{Noir::Executer.find_command(['Noir', 'Command'], 'f')}.to raise_error(RuntimeError)
     end
   end # find_command
 

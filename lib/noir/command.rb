@@ -3,7 +3,7 @@ class Noir::Command < Noir::Base::Command
     def execute *args
       # if arguments missing. call help.
       Noir::Command::Help.execute if args.size.zero?
-      check_command_not_found *args
+      check_command_not_found(*args)
     end
   end
 end

@@ -11,6 +11,6 @@ describe 'Noir::Command::Help' do
   end
 
   it 'is raise exception when apply arguments' do
-    expect{Noir::Command::Help.execute 'abc'}.to raise_error
+    expect{Noir::Command::Help.execute 'abc'}.to raise_error(RuntimeError)
   end
 end

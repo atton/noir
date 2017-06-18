@@ -3,6 +3,7 @@ require 'spec_helper'
 
 describe 'Noir::Command::Summarize::Note::Weekly' do
   include_context :dependencie_on_current_directory
+  dependent_time_now
 
   it 'is inherited Noir::Base::Command' do
     expect(Noir::Command::Summarize::Note::Weekly.superclass).to eq(Noir::Base::Command)
