@@ -1,4 +1,5 @@
 require 'noir'
+require 'rspec/temp_dir'
 
 $LOAD_PATH << File.expand_path('../../lib', __FILE__)
 
@@ -43,11 +44,10 @@ def stub_commands
 end
 
 shared_context :dependencie_on_current_directory do
+  include_context 'uses temp dir'
   around do |spec|
-    Dir.mktmpdir('noir-tempdir') do |dir|
-      Dir.chdir(dir) do
-        spec.run
-      end
+    Dir.chdir(temp_dir) do
+      spec.run
     end
   end
 end
