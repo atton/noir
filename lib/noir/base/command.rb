@@ -31,6 +31,7 @@ module Noir::Base
           const_get(const).class == Class &&
           const_get(const).ancestors.include?(Noir::Base::Command)
         end
+        consts.sort
       end
 
       def check_command_not_found command=nil, *args

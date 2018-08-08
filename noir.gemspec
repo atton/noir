@@ -21,8 +21,8 @@ Gem::Specification.new do |spec|
   spec.required_ruby_version = '>= 2.0.0'
 
   spec.add_development_dependency 'bundler',        '~> 1.6'
-  spec.add_development_dependency 'rake',           '12.0.0'
-  spec.add_development_dependency 'rspec',          '3.6.0'
+  spec.add_development_dependency 'rake',           '12.3.1'
+  spec.add_development_dependency 'rspec',          '3.8.0'
   spec.add_development_dependency 'rspec-temp_dir', '1.0.0'
-  spec.add_development_dependency 'pry',            '0.10.4'
+  spec.add_development_dependency 'pry',            '0.11.3'
 end
