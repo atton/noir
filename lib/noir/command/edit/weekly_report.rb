@@ -11,7 +11,7 @@ class Noir::Command::Edit::WeeklyReport < Noir::Base::Command
 
   # main method
   def self.edit_report separator_day_of_week, week_diff=0
-    system("vim #{report_name(separator_day_of_week, week_diff)}.txt")
+    system("#{Noir::Command::Edit.editor} #{report_name(separator_day_of_week, week_diff)}.txt")
   end
 end
 

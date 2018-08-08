@@ -4,7 +4,7 @@ class Noir::Command::Edit::Note < Noir::Base::TerminalCommand
   class << self
 
     def edit target
-      system("vim #{target}")
+      system("#{Noir::Command::Edit.editor} #{target}")
     end
 
     def execute *args
