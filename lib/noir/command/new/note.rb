@@ -15,8 +15,8 @@ class Noir::Command::New::Note < Noir::Base::TerminalCommand
       if SerialDigitRange.cover?(digit)
         return format("%0#{digit}d", number)
       else
-        raise ["Invalid ENV['NOIR_NOTE_SERIAL_DIGIT'](#{digit_from_env}).",
-               "support digit is [#{SerialDigitRange.to_a.join(', ')}]."].join("\n")
+        raise ["Invalid NOIR_NOTE_SERIAL_DIGIT=#{digit_from_env}.",
+               "supported digits are [#{SerialDigitRange.to_a.join(', ')}]."].join("\n")
       end
     end
 

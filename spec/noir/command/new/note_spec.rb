@@ -79,5 +79,12 @@ describe 'Noir::Command::New::Note' do
       allow(Dir).to receive(:glob).with(anything).and_return([])
       expect{Noir::Command::New::Note.execute}.to raise_error(RuntimeError, /DIGIT.*abc.*/)
     end
+
+    it 'if raise error, not create file' do
+      allow(ENV).to receive(:[]).with('NOIR_NOTE_SERIAL_DIGIT').and_return('hogehoge')
+      allow(Dir).to receive(:glob).with(anything).and_return([])
+      expect(Noir::Command::New).to_not receive(:createFile)
+      expect{Noir::Command::New::Note.execute}.to raise_error(RuntimeError, /DIGIT.*hoge.*/)
+    end
   end
 end
