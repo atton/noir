@@ -1,7 +1,7 @@
 # Noir
 [![Gem Version](https://badge.fury.io/rb/noir.svg)](http://badge.fury.io/rb/noir)
-[![Build Status](https://travis-ci.org/atton-/noir.svg)](https://travis-ci.org/atton-/noir)
-[![Code Climate](https://codeclimate.com/github/atton-/noir/badges/gpa.svg)](https://codeclimate.com/github/atton-/noir)
+[![Build Status](https://travis-ci.org/atton/noir.svg)](https://travis-ci.org/atton/noir)
+[![Code Climate](https://codeclimate.com/github/atton/noir/badges/gpa.svg)](https://codeclimate.com/github/atton/noir)
 
 Noir is utility commands for atton.
 
@@ -22,7 +22,7 @@ Add this code in .zshrc
 
 ## Contributing
 
-1. Fork it ( http://github.com/atton-/noir/fork )
+1. Fork it ( http://github.com/atton/noir/fork )
 2. Create your feature branch (`git checkout -b my-new-feature`)
 3. Commit your changes (`git commit -am 'Add some feature'`)
 4. Push to the branch (`git push origin my-new-feature`)
