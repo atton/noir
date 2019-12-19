@@ -7,5 +7,4 @@ class Noir::Command::Edit < Noir::Base::Command
 
 end
 
-require 'noir/command/edit/weekly_report'
 require 'noir/command/edit/note'
